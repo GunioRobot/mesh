@@ -43,7 +43,7 @@ abstract class Mesh_Rule_Core {
 	 */
 	public static function length($value, $min_length, $max_length)
 	{
-		return (bool) ((Mesh_Base_Rule::min_length($value, $min_length)) && (Mesh_Base_Rule::max_length($value, $max_length)));
+		return (bool) ((Mesh_Rule::min_length($value, $min_length)) && (Mesh_Rule::max_length($value, $max_length)));
 	}
 	
 	/**
