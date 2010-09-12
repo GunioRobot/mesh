@@ -42,7 +42,7 @@ abstract class Mesh_Field_Core {
 	 * @param 	string 		field name
 	 * @return 	Mesh_Field
 	 */
-	public static function factory($name, $label)
+	public static function factory($name, $label = NULL)
 	{
 		return new Mesh_Field($name);
 	}
@@ -90,17 +90,6 @@ abstract class Mesh_Field_Core {
 		}
 		
 		return $value;
-	}
-	
-	/**
-	 * Getter and setter for the field value.
-	 * 
-	 * @param 	string 	$value 	[optional] field value
-	 * @return 	mixed|Mesh_Field 	getter returns a value of any type and setter returns a Mesh_Field
-	 */
-	public function value($value)
-	{
-		return $this->getter_setter('value', $value);
 	}
 	
 	/**
@@ -231,23 +220,38 @@ abstract class Mesh_Field_Core {
 	}
 	
 	/**
-	 * Return the cleaned value if this field validates 
-	 * otherwise return the original value.
+	 * Getter and setter for the field value. Getter returns the cleaned 
+	 * value if this field validates otherwise returns the original value.
+	 * Setter sets the dirty value.
 	 * 
-	 * @return 	mixed 	field value
+	 * @param 	string 	$value 	[optional] field value
+	 * @return 	mixed|Mesh_Field 	getter returns a value of any type and setter returns a Mesh_Field
 	 */
-	public function value()
+	public function value($value = NULL)
 	{
-		if($this->value_clean !== NULL)
+		// getter; return the field value
+		if($value === NULL)
 		{
-			$value = $this->value_clean;
+			// check if the cleaned value is available
+			if($this->value_clean !== NULL)
+			{
+				$return_value = $this->value_clean;
+			}
+			else
+			{
+				$return_value = $this->value_dirty;
+			}
 		}
+		// setter; set the field value
 		else
 		{
-			$value = $this->value_dirty;
+			// set value
+			$this->value_dirty = $value;
+			
+			$return_value = $this;
 		}
 		
-		return $value;
+		return $return_value;
 	}
 	
 	/**
