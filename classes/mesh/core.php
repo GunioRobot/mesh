@@ -9,6 +9,9 @@
  */
 abstract class Mesh_Core extends ArrayObject {
 	
+	// enable debugging?
+	public static $debugging = TRUE;
+	
 	// fields, name => field
 	protected $fields = array();
 	
