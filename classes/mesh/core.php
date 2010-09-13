@@ -144,10 +144,13 @@ abstract class Mesh_Core extends ArrayObject {
 					// return the clean value (if available)
 					$return_value = $field->value();
 				}
-				else
-				{
-					$return_value = $this[$name];
-				}
+			}
+			
+			// return the dirty (pre-validation) value if the 
+			// field is not found or if validation has falied
+			if(empty($return_value))
+			{
+				$return_value = $this[$name];
 			}
 		}
 		// setter
