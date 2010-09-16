@@ -168,6 +168,27 @@ abstract class Mesh_Core extends ArrayObject {
 	}
 	
 	/**
+	 * Return the field value otherwise return the default value
+	 * 
+	 * @param 	string 	$name 	field name
+	 * @param 	string 	$default 	default value
+	 * @return 	string 	form value otherwise the default value
+	 */
+	public function value_default($name, $default)
+	{
+		// get field value
+		$value = $this->value($name);
+		
+		// return the default value if no return value has been set
+		if(empty($value))
+		{
+			$value = $default;
+		}
+		
+		return $value;
+	}
+	
+	/**
 	 * Combined getter and setter. Getter returns the array representation of the 
 	 * current object.
 	 * 
@@ -180,7 +201,26 @@ abstract class Mesh_Core extends ArrayObject {
 		// getter; return the values to validate
 		if($values === array())
 		{
-			$value = $this->getArrayCopy();
+			// if validation has passed return clean values
+			if($this->passed)
+			{
+				// fetch value for each field
+				foreach($this->fields as $field_name => $field)
+				{
+					$field_value = $field->value();
+					
+					// only replace the original value if the field has a value
+					if($field_value !== NULL)
+					{
+						$value[$field_name] = $field_value;
+					}
+				}
+			}
+			// return original values
+			else
+			{
+				$value = $this->getArrayCopy();
+			}
 		}
 		// setter; set the values to validate
 		else
