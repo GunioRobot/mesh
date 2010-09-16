@@ -180,7 +180,7 @@ abstract class Mesh_Core extends ArrayObject {
 		$value = $this->value($name);
 		
 		// return the default value if no return value has been set
-		if(empty($value))
+		if($value === NULL)
 		{
 			$value = $default;
 		}
