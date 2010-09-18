@@ -215,6 +215,17 @@ abstract class Mesh_Core extends ArrayObject {
 						$value[$field_name] = $field_value;
 					}
 				}
+				
+				try
+				{
+					// return cleaned and validated values and other values 
+					// that were set but not validated
+					$value = array_merge($this->getArrayCopy(), $value);
+				}
+				catch(Exception $e)
+				{
+					$value = $this->getArrayCopy();
+				}
 			}
 			// return original values
 			else
