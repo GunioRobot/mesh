@@ -134,11 +134,12 @@ abstract class Mesh_Core extends ArrayObject {
 	{
 		$return_value = '';
 		
+		// get field by name
+		$field = $this->field($name);
+		
 		// getter
 		if($value === NULL)
 		{
-			$field = $this->field($name);
-			
 			// if the field is found
 			if($field instanceof Mesh_Field)
 			{
@@ -159,7 +160,15 @@ abstract class Mesh_Core extends ArrayObject {
 		// setter
 		else
 		{
+			// set value in Mesh
 			$this[$name] = $value;
+			
+			// if the field is found
+			if($field instanceof Mesh_Field)
+			{
+				// set the field value
+				$field->value($value);
+			}
 			
 			$return_value = $this;
 		}

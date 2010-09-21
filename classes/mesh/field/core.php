@@ -245,8 +245,8 @@ abstract class Mesh_Field_Core {
 		// setter; set the field value
 		else
 		{
-			// set value
-			$this->value_dirty = $value;
+			// set (clean and dirty) value
+			$this->value_clean = $this->value_dirty = $value;
 			
 			$return_value = $this;
 		}
