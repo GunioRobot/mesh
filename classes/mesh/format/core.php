@@ -1,14 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * Mesh Formats.
- * 
+ *
  * @package 	Mesh
  * @author 		Suleman Chikhalia
  * @copyright 	(c) Suleman Chikhalia
  * @licence 	MIT
  */
 abstract class Mesh_Format_Core {
-	
+
 	const ALPHA = 'alpha';
 	const ALPHA_SPACE = 'alpha_space';
 	const ALPHA_DASH = 'alpha_dash';
@@ -30,7 +30,7 @@ abstract class Mesh_Format_Core {
 	const TEXT = 'text';
 	const URL = 'url';
 	const USERNAME = 'username';
-	
+
 	public static function text($str)
 	{
 		// pL matches letters
@@ -41,7 +41,7 @@ abstract class Mesh_Format_Core {
 		// pPo matches normal puncuation
 		return (bool) preg_match('/^[\pL\pN\pZ\p{Pc}\p{Pd}\p{Po}]++$/uD', (string) $str);
 	}
-	
+
 	/**
 	 * Validate a URL.
 	 *
@@ -184,9 +184,9 @@ abstract class Mesh_Format_Core {
 		{
 			return FALSE;
 		}
-		
+
 		$date = explode('-', $str);
-		
+
 		// check and return date validity
 		return checkdate($date[1], $date[2], $date[0]);
 	}
@@ -211,10 +211,10 @@ abstract class Mesh_Format_Core {
 			return ctype_alpha($str);
 		}
 	}
-	
+
 	/**
 	 * Checks whether a string consists of alphabetical characters and spaces only.
-	 * 
+	 *
 	 * @param   string   input string
 	 * @param   boolean  trigger UTF-8 compatibility
 	 * @return  boolean
@@ -222,7 +222,7 @@ abstract class Mesh_Format_Core {
 	public static function alpha_space($str, $utf8 = FALSE)
 	{
 		$str = (string) str_replace(' ', '', $str);
-		
+
 		return (bool) self::alpha($str, $utf8);
 	}
 
@@ -301,7 +301,7 @@ abstract class Mesh_Format_Core {
 
 		return (bool) preg_match('/^-?[0-9'.$decimal.']++$/D', (string) $str);
 	}
-	
+
 	/**
 	 * Check an email address for correct format.
 	 *
@@ -352,7 +352,7 @@ abstract class Mesh_Format_Core {
 		// Check if the email domain has a valid MX record
 		return (bool) checkdnsrr(preg_replace('/^[^@]+@/', '', $email), 'MX');
 	}
-	
+
 	/**
 	 * Checks if a string is a proper decimal format. The format array can be
 	 * used to specify a decimal length, or a number and decimal length, eg:
@@ -383,7 +383,7 @@ abstract class Mesh_Format_Core {
 	{
 		return (bool) preg_match('/^#?+[0-9a-f]{3}(?:[0-9a-f]{3})?$/iD', $str);
 	}
-	
+
 	/**
 	 * Checks a field against a regular expression.
 	 *
@@ -395,10 +395,10 @@ abstract class Mesh_Format_Core {
 	{
 		return (bool) preg_match($expression, (string) $value);
 	}
-	
+
 	/**
 	 * Check a username for the correct format.
-	 * 
+	 *
 	 * @param   string  username
 	 * @return  boolean
 	 */
@@ -406,10 +406,10 @@ abstract class Mesh_Format_Core {
 	{
 		return (bool) preg_match('/^[a-z\d_]+$/iD', $username);
 	}
-	
+
 	/**
 	 * Check a name for the correct format.
-	 * 
+	 *
 	 * @param   string  name
 	 * @return  boolean
 	 */
@@ -417,5 +417,5 @@ abstract class Mesh_Format_Core {
 	{
 		return (bool) preg_match('/^[a-z-\' ]+$/iD', $name);
 	}
-	
+
 } // End Mesh Format Core

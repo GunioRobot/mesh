@@ -1,14 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * Mesh Rules.
- * 
+ *
  * @package 	Mesh
  * @author 		Suleman Chikhalia
  * @copyright 	(c) Suleman Chikhalia
  * @licence 	MIT
  */
 abstract class Mesh_Rule_Core {
-	
+
 	const NOT_EMPTY = 'not_empty';
 	const LENGTH = 'length';
 	const MIN_LENGTH = 'min_length';
@@ -16,7 +16,7 @@ abstract class Mesh_Rule_Core {
 	const EXACT_LENGTH = 'exact_length';
 	const RANGE = 'range';
 	const MATCHES = 'matches';
-	
+
 	/**
 	 * Checks if a field is not empty.
 	 *
@@ -32,10 +32,10 @@ abstract class Mesh_Rule_Core {
 
 		return ($value === '0' OR ! empty($value));
 	}
-	
+
 	/**
 	 * Checks that a field is within the character length range.
-	 * 
+	 *
 	 * @param   string   value
 	 * @param   integer  minimum length required
 	 * @param   integer  maximum length required
@@ -45,7 +45,7 @@ abstract class Mesh_Rule_Core {
 	{
 		return (bool) ((Mesh_Rule::min_length($value, $min_length)) && (Mesh_Rule::max_length($value, $max_length)));
 	}
-	
+
 	/**
 	 * Checks that a field is long enough.
 	 *
@@ -57,7 +57,7 @@ abstract class Mesh_Rule_Core {
 	{
 		return UTF8::strlen($value) >= $length;
 	}
-	
+
 	/**
 	 * Checks that a field is short enough.
 	 *
@@ -81,7 +81,7 @@ abstract class Mesh_Rule_Core {
 	{
 		return UTF8::strlen($value) === $length;
 	}
-	
+
 	/**
 	 * Tests if a number is within a range.
 	 *
@@ -94,7 +94,7 @@ abstract class Mesh_Rule_Core {
 	{
 		return ($number >= $min AND $number <= $max);
 	}
-	
+
 	/**
 	 * Checks if two values are the identical.
 	 *
@@ -106,5 +106,5 @@ abstract class Mesh_Rule_Core {
 	{
 		return ($value === $match);
 	}
-	
+
 } // End Mesh Rule Core

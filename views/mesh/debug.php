@@ -43,11 +43,11 @@ if($debug !== array())
 				<td><?php echo $value['function']; ?></td>
 				<td><?php var_dump($value['value']); ?></td>
 				<td>
-				<?php 
+				<?php
 					if($value['exclude'])
 					{
 						echo '<span>SKIPPED</span>';
-					} 
+					}
 					elseif(($value['type'] === 'rule') || ($value['type'] === 'format'))
 					{
 						echo ($value['passed'] ? '<span class="passed">PASSED</span>' : '<span class="failed">FAILED</span>');
